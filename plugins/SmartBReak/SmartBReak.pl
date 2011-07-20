@@ -29,14 +29,20 @@ sub init_registry {
                         smartbreak => {
                             label => 'Smart Break',
                             code => \&_smart_break_action,
-                            permissions => 'publish_post',
+                            permit_action => {
+                                permit_action => 'publish_post',
+                                include_all => 1,
+                            },
                         },
                     },
                     page => {
                         smartbreak => {
                             label => 'Smart Break',
                             code => \&_smart_break_action,
-                            permissions => 'publish_post',
+                            permit_action => {
+                                permit_action => 'manage_pages',
+                                include_all => 1,
+                            },
                         },
                     },
                 },
@@ -65,6 +71,11 @@ sub init_registry {
 
 sub _smart_break_action {
     my $app = MT->instance;
+    my $class = $app->param( '_type' );
+    my $can_copy_entries = $class eq 'entry' ? $app->can_do( 'create_new_entry' ) : $app->can_do( 'create_new_page' ) ;
+    unless ( $can_copy_entries ) {
+        return $app->trans_error( 'Permission denied.' );
+    }
     my @ids = $app->param( 'id' ) or return $app->trans_error( 'Invalid request.' );
     my $saved = 0;
     for my $id ( @ids ) {
