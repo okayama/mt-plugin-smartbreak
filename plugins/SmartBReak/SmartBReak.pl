@@ -4,7 +4,7 @@ use MT;
 use MT::Plugin;
 @MT::Plugin::SmartBReak::ISA = qw( MT::Plugin );
 
-our $VERSION = "1.0.0";
+our $VERSION = "1.0";
 
 my $plugin = new MT::Plugin::SmartBReak( {
     id => 'SmartBReak',
