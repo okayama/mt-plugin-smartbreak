@@ -1,0 +1,39 @@
+id: SmartBReak
+key: smartbreak
+name: SmartBReak
+author_name: okayama
+author_link: http://weeeblog.net/
+description: <__trans phrase='_PLUGIN_DESCRIPTION'>
+version: 1.1
+l10n_class: SmartBReak::L10N
+applications:
+    cms:
+        list_actions:
+            entry:
+                smartbreak:
+                    label: Smart BReak
+                    code: $smartbreak::SmartBReak::Plugin::_list_actions_smart_break_action
+                    permit_action:
+                        permit_action: publish_post
+                        include_all: 1
+            page:
+                smartbreak:
+                    label: Smart BReak
+                    code: $smartbreak::SmartBReak::Plugin::_smart_break_action
+                    permit_action:
+                        permit_action: manage_pages
+                        include_all: 1
+        callbacks:
+            cms_post_save.entry: $smartbreak::SmartBReak::Callbacks::_cb_cms_post_save_entry
+            cms_post_save.page: $smartbreak::SmartBReak::Callbacks::_cb_cms_post_save_entry
+            api_post_save.entry: $smartbreak::SmartBReak::Callbacks::_cb_cms_post_save_entry
+            api_post_save.page: $smartbreak::SmartBReak::Callbacks::_cb_cms_post_save_entry
+        tags:
+            block:
+                SmartBReak: $smartbreak::SmartBReak::Tags::_hdlr_smart_break
+            modifier:
+                smart_break: $smartbreak::SmartBReak::Tags::_fltr_smart_break
+
+
+
+
