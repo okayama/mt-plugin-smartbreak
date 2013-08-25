@@ -1,6 +1,6 @@
-package RebuildParentIndex::L10N::en_us;
+package SmartBReak::L10N::en_us;
 use strict;
-use base 'RebuildParentIndex::L10N';
+use base 'SmartBReak::L10N';
 use vars qw( %Lexicon );
 
 our %Lexicon = (
